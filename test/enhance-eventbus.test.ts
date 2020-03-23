@@ -1,4 +1,4 @@
-import MsgBus from "../src/MsgBus"
+import MsgBus from "../src/enhance-eventbus"
 
 test('MsgBus.BaseEventBus is instantiable', () => {
   expect(new MsgBus.BaseEventBus()).toBeInstanceOf(MsgBus.BaseEventBus)
