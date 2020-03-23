@@ -22,7 +22,7 @@
 
 ## example
 
-![example](./screenshot/example.gif)
+![example](https://github.com/cjfff/enhance-eventbus/raw/master/screenshot/example.gif)
 
 
 ```js

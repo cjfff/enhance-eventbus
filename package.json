@@ -1,14 +1,13 @@
 {
   "name": "enhance-eventbus",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a enhance eventbus",
   "keywords": [],
   "main": "dist/enhance-eventbus.umd.js",
   "module": "dist/enhance-eventbus.es5.js",
   "typings": "dist/types/enhance-eventbus.d.ts",
   "files": [
-    "dist",
-    "screenshot"
+    "dist"
   ],
   "author": "cjfff <cjfff1996@gmali.com>",
   "repository": {
