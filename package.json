@@ -1,7 +1,7 @@
 {
   "name": "enhance-eventbus",
   "version": "1.0.1",
-  "description": "",
+  "description": "a enhance eventbus",
   "keywords": [],
   "main": "dist/enhance-eventbus.umd.js",
   "module": "dist/enhance-eventbus.es5.js",
