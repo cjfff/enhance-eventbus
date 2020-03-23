@@ -1,5 +1,7 @@
 # enhance-eventbus
 
+## 前言
+
 以简单的 api，类似于 vue 的 `Eventbus` 一样的使用方式，实现 跨浏览器 tab 之间，以及 iframe 与 global 之间的通信。
 
 ## example
