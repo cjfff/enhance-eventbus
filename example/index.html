@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .layout {
+      height: 300px;
+      width: 300px;
+      border: 1px solid #000;
+    }
+
+    .iframe {
+      margin-top: 20px;
+      width: 300px;
+      height: 300px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="layout">
+    <h2>这是 global 区域</h2>
+    <button id="btn">to iframe</button>
+    <div class="content"></div>
+  </div>
+
+
+
+
+  <iframe class="iframe" src="./another.html" frameborder="0"></iframe>
+
+
+  <script src="./tabeventbus.umd.js"></script>
+
+
+  <script>
+
+    const eventBus = new tabeventbus.StorageEventBus({
+      originWhiteList: ['http://192.168.2.37:9999', 'http://192.168.2.37:8888']
+
+    })
+    const content = document.querySelector('.content');
+
+    eventBus.on('toGlobal', ([data]) => {
+
+      content.innerHTML = data.payload
+    })
+
+    document.querySelector('#btn').addEventListener('click', () => {
+      eventBus.emit('toIframe', { msg: 'success', payload: '这是来自 global 的消息' + Date.now() })
+    })
+
+  </script>
+</body>
+
+</html>

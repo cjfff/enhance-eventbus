@@ -7,7 +7,7 @@ import json from 'rollup-plugin-json'
 
 const pkg = require('./package.json')
 
-const libraryName = 'tabeventbus'
+const libraryName = pkg.name
 
 export default {
   input: `src/${libraryName}.ts`,

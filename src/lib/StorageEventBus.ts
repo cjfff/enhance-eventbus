@@ -1,18 +1,29 @@
-import BaseEventBus, { eventData, Config, Type, Listener } from './BaseEventBus'
-
-type StorageConfig = Omit<Config, 'busType'>
-
-const type = 'storage'
+import BaseEventBus, { eventData, Type, Listener } from './BaseEventBus'
 
 export default class StorageEventBus extends BaseEventBus {
-  constructor(config: StorageConfig) {
-    super({ ...config, busType: type })
 
-    window.addEventListener(type, this.handlerMethod.bind(this));
+  constructor() {
+    super()
+
+    window.addEventListener('storage', this.handlerMethod.bind(this));
   }
 
-  handleDataMethod(e: any): eventData | void {
-    const { key: type, newValue } = e as StorageEvent;
+  private handlerMethod(e: StorageEvent) {
+
+    const data = this.handleDataMethod(e);
+
+    // 没有传递信息
+    if (!data) return;
+
+    const { type, payload } = data;
+
+    (this.subscribes[type] || []).forEach(cb => {
+      cb && cb(...payload);
+    });
+  }
+
+  handleDataMethod(e: StorageEvent): eventData | void {
+    const { key: type, newValue } = e;
 
     if (!type) return
 
@@ -27,6 +38,8 @@ export default class StorageEventBus extends BaseEventBus {
     try {
       payload = JSON.parse(newValue);
     } catch (error) {
+      payload = null;
+      console.error(error)
       throw error
     }
 
@@ -40,15 +53,25 @@ export default class StorageEventBus extends BaseEventBus {
     this.subscribes[type] = (this.subscribes[type] || [])
 
     this.subscribes[type].push(listener)
+
+    // 重新了 addListener 方法，因为这里需要初始化检测函数
     localStorage.setItem(type, 'init');
 
     return this
   };
 
 
-  emit(type: string, ...args: any[]): boolean {
+  emit(type: Type, ...args: any[]): boolean {
 
-    const data = args ? JSON.stringify(args) : `${Math.random()}`
+    let data = null;
+
+    // 可能传输的数据会有问题，这里进行一下错误捕捉
+    try {
+      data = JSON.stringify(args);
+    } catch (error) {
+      data = JSON.stringify(error)
+      console.error(error)
+    }
 
     localStorage.setItem(type, data);
 
