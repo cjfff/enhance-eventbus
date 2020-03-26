@@ -32,12 +32,24 @@ const eventBus = new tabeventbus.StorageEventBus({
   isDev: () => true
 })
 
-eventBus.on('someEvent', ([data]) => {
+eventBus.on('someEvent', (data) => {
 
   console.log(data)
 })
 
 eventBus.emit('someEvent', {msg: 'hello world'})
+```
+
+## vue project example
+
+```js
+import enhanceEventbus from "enhance-eventbus"
+import Vue from "vue"
+
+Vue.use(enhanceEventbus, {
+  type: "storage",
+  globalKey: "$eventBus" // 这里配置的是 vue.prototype 挂载的属性名叫什么
+})
 ```
 
 

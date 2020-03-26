@@ -1,8 +1,8 @@
 {
   "name": "enhance-eventbus",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "a enhance eventbus",
-  "keywords": [],
+  "keywords": ["eventbus", "vue eventbus", "window communication", "tab communication"],
   "main": "dist/enhance-eventbus.umd.js",
   "module": "dist/enhance-eventbus.es5.js",
   "typings": "dist/types/enhance-eventbus.d.ts",

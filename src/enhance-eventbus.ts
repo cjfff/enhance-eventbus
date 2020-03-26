@@ -7,17 +7,20 @@ const map = {
 }
 
 type Config = {
-  type: 'storage' | 'base'
+  type: 'storage' | 'base',
+  globalKey: string;
 }
+
+const defaultKey = '$eventBus'
 
 export default {
   StorageEventBus,
   BaseEventBus,
-  install(Vue: any, config: Config = { type: 'base' }) {
+  install(Vue: any, config: Config = { type: 'base', globalKey: defaultKey }) {
     if (!['storage', 'base'].includes(config.type)) {
       throw new Error('type is not in storage ');
     }
-    Vue.prototype.$msgBus = map[config.type]
+    Vue.prototype[config.globalKey || defaultKey] = map[config.type]
   }
 
 }
